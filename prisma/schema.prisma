@@ -14,9 +14,10 @@ datasource db {
 }
 
 model Album {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   name      String
   artist    String
+  year      Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   songs     Song[]
@@ -26,12 +27,15 @@ model Album {
 }
 
 model Song {
-  id        String   @id @default(cuid())
-  name      String
-  album     Album    @relation(fields: [albumId], references: [id])
-  albumId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String
+  album       String
+  albumDetail Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  albumId     Int
+  artist      String
+  year        Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@index([albumId])
   @@map("songs")
