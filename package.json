@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cross-env IS_BUILDING=true next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
+    "@prisma/client": "5.15.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -44,11 +45,14 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.5",
     "input-otp": "^1.2.4",
+    "lucide-react": "^0.395.0",
     "next": "^14",
     "next-themes": "^0.3.0",
+    "prisma": "^5.15.0",
     "react": "rc",
     "react-day-picker": "^8.10.1",
     "react-dom": "rc",
+    "react-error-boundary": "^4.0.13",
     "react-hook-form": "^7.51.5",
     "react-resizable-panels": "^2.0.19",
     "sonner": "^1.5.0",
@@ -58,13 +62,14 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "typescript": "^5"
   }
 }
