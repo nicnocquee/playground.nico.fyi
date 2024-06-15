@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cross-env IS_BUILDING=true next build",
+    "db:migrate": "prisma migrate deploy",
+    "build": "npm run db:migrate && cross-env IS_BUILDING=true next build",
     "start": "next start",
     "lint": "next lint"
   },
