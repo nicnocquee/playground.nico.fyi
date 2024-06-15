@@ -2,7 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First run the postgres database:
+
+```bash
+docker-compose up
+```
+
+Second, copy the `env.example` file to `.env`.
+
+Last, run the development server:
 
 ```bash
 npm run dev
