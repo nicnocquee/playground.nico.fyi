@@ -6,8 +6,8 @@
     "dev": "next dev",
     "db:migrate": "prisma migrate deploy",
     "db:generate": "prisma generate",
-    "build": "npm run db:generate && cross-env IS_BUILDING=true next build",
-    "start": "npm run db:migrate && next start",
+    "build": "npm run db:migrate && cross-env IS_BUILDING=true next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
