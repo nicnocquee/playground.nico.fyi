@@ -1,7 +1,6 @@
 import { prismaClient } from "@/prisma/prisma-client";
 import Albums from "../hoisted-client/albums";
 import Songs from "../hoisted-client/songs";
-import Seed from "./seed";
 
 export default function Page() {
   const albums = prismaClient.album.findMany({ take: 100 });
@@ -14,7 +13,6 @@ export default function Page() {
         <Albums dataSource={albums} />
         <Songs dataSource={songs} />
       </div>
-      <Seed />
     </div>
   );
 }
