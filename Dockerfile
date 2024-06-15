@@ -31,6 +31,10 @@ COPY postcss.config.mjs .
 # https://github.com/vercel/next.js/discussions/14030
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
+ARG BASIC_AUTH_USER
+ENV BASIC_AUTH_USER=${BASIC_AUTH_USER}
+ARG BASIC_AUTH_PASSWORD
+ENV BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
 
 # Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line to disable telemetry at build time
@@ -68,6 +72,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Environment variables must be redefined at run time
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
+ARG BASIC_AUTH_USER
+ENV BASIC_AUTH_USER=${BASIC_AUTH_USER}
+ARG BASIC_AUTH_PASSWORD
+ENV BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
 
 # Uncomment the following line to disable telemetry at run time
 # ENV NEXT_TELEMETRY_DISABLED 1
