@@ -3,7 +3,7 @@ import { prismaClient } from "@/prisma/prisma-client";
 import { revalidatePath } from "next/cache";
 
 export const seedData = async () => {
-  for (let i = 0; i < 10000; i++) {
+  for (let i = 0; i < 100; i++) {
     await prismaClient.album.create({
       data: {
         name: `Album ${i + 1}`,
