@@ -1,10 +1,16 @@
 import { prismaClient } from "@/prisma/prisma-client";
 import Albums from "../hoisted-client/albums";
 import Songs from "../hoisted-client/songs";
+import { headers } from "next/headers";
 
 export default function Page() {
-  const albums = prismaClient.album.findMany({ take: 100 });
-  const songs = prismaClient.song.findMany({ take: 100 });
+  headers();
+  const albums = process.env.IS_BUILDING
+    ? Promise.resolve([])
+    : prismaClient.album.findMany({ take: 100 });
+  const songs = process.env.IS_BUILDING
+    ? Promise.resolve([])
+    : prismaClient.song.findMany({ take: 100 });
 
   return (
     <div className="p-4">
