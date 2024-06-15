@@ -70,5 +70,6 @@ ENV DATABASE_URL=${DATABASE_URL}
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 # Note: Don't expose ports here, Compose will handle that for us
+EXPOSE 3000
 
 CMD ["node", "server.js"]
