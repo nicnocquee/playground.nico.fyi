@@ -48,6 +48,8 @@ RUN \
 # Step 2. Production image, copy all the files and run next
 FROM base AS runner
 
+RUN apk --no-cache add curl
+
 WORKDIR /app
 
 # Don't run production as root
