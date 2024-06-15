@@ -16,5 +16,8 @@ export const authorize = () => {
     }
   }
 
-  return Response.json({ error: "Unauthorized" }, { status: 401 });
+  return Response.json(
+    { error: "Unauthorized" },
+    { headers: { "WWW-Authenticate": "Basic" }, status: 401 }
+  );
 };

@@ -1,4 +1,3 @@
-"use server";
 import { prismaClient } from "@/prisma/prisma-client";
 import { revalidatePath } from "next/cache";
 
