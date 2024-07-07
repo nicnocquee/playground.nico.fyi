@@ -1,14 +1,14 @@
 export const songsData = async () => {
   // get the songs data from a database or API
-  await new Promise((resolve) => setTimeout(resolve, 2000 + Math.random() * 10000))
+  await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000));
 
   if (!process.env.IS_BUILDING) {
     if (Math.random() < 0.5) {
-      throw new Error('Fake error: something went wrong')
+      throw new Error("Fake error: something went wrong");
     }
   }
 
-  const songs = []
+  const songs = [];
   for (let i = 0; i < 10000; i++) {
     songs.push({
       id: i + 1,
@@ -16,16 +16,16 @@ export const songsData = async () => {
       album: `Album ${i + 1}`,
       artist: `Artist ${i + 1}`,
       year: 2022 + i,
-    })
+    });
   }
 
-  return songs
-}
+  return songs;
+};
 
 export type Song = {
-  id: number
-  name: string
-  album: string
-  artist: string
-  year: number
-}
+  id: number;
+  name: string;
+  album: string;
+  artist: string;
+  year: number;
+};
