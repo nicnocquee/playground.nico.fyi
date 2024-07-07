@@ -35,11 +35,13 @@ const favorites = [
 ];
 
 export const getAllData = async () => {
+  console.log(" getAllData");
   await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000));
   return allData;
 };
 
 export const getFavoriteData = async (userId: number) => {
+  console.log(" getFavoriteData", userId);
   await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000));
   return favorites.filter((favorite) => favorite.userId === userId);
 };

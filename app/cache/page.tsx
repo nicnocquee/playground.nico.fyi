@@ -6,8 +6,9 @@ import Favorites from "./favorites";
 import { Suspense } from "react";
 
 export default async function Page() {
+  console.log(`Page: /cache`);
   const user = await checkSessionValid();
-
+  console.log(`Page: /cache`);
   const data = await getAllData();
 
   return (

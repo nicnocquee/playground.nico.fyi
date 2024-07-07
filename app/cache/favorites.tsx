@@ -3,7 +3,9 @@ import { getAllData, getFavoriteData } from "./data-source";
 import { checkSessionValid } from "./session";
 
 export default async function Favorites() {
+  console.log(`RSC: favorites.tsx`);
   const user = await checkSessionValid();
+  console.log(`RSC: favorites.tsx`);
   const [data, favorites] = await Promise.all([
     getAllData(),
     getFavoriteData(user.id),

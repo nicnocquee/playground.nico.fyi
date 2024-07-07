@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { JWTPayload, SignJWT, jwtVerify } from "jose";
 import { NextRequest, NextResponse } from "next/server";
 import { redirect } from "next/navigation";
-import { cache } from "react";
+// import { cache } from "react";
 
 // fake users
 export const users = [
@@ -54,7 +54,8 @@ export async function getSession() {
 /**
  * This function always returns valid user if succeeds. Otherwise it will redirect to /
  */
-export const checkSessionValid = cache(async () => {
+export const checkSessionValid = async () => {
+  console.log(" checkSessionValid");
   const session = await getSession();
   if (!session || !session.userId || new Date() > new Date(session.expires)) {
     redirect("/cache/login");
@@ -68,7 +69,7 @@ export const checkSessionValid = cache(async () => {
     redirect("/");
   }
   return user;
-});
+};
 
 export async function createSession(userId: string) {
   const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days, 24 hours, 60 minutes, 60 seconds, 1000 milliseconds
