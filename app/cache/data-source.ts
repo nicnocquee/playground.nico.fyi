@@ -1,3 +1,5 @@
+import { unstable_cache } from "next/cache";
+import { cache } from "react";
 import "server-only";
 
 const allData = [
@@ -34,14 +36,14 @@ const favorites = [
   },
 ];
 
-export const getAllData = async () => {
+export const getAllData = unstable_cache(async () => {
   console.log(" getAllData");
-  await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000));
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return allData;
-};
+}, ["allData"]);
 
-export const getFavoriteData = async (userId: number) => {
+export const getFavoriteData = cache(async (userId: number) => {
   console.log(" getFavoriteData", userId);
-  await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   return favorites.filter((favorite) => favorite.userId === userId);
-};
+});

@@ -1,6 +1,6 @@
 export const albumsData = async () => {
   // get the albums data from a database or API
-  await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   if (!process.env.IS_BUILDING) {
     if (Math.random() < 0.5) {
