@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Album 1",
+    "artist": "Artist 1",
+    "year": 2022
+  },
+  {
+    "id": 2,
+    "name": "Album 2",
+    "artist": "Artist 2",
+    "year": 2022
+  },
+  {
+    "id": 3,
+    "name": "Album 3",
+    "artist": "Artist 3",
+    "year": 2022
+  }
+]

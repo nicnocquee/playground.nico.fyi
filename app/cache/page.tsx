@@ -4,6 +4,11 @@ import { getAllData } from "./data-source";
 import LogoutForm from "./logout-form";
 import Favorites from "./favorites";
 import { Suspense } from "react";
+import { FormButton } from "./form-button";
+import { updateFavoriteAction } from "./favorite-action";
+import { refreshFavoriteAction } from "./refresh-action";
+import GlobalData from "./global-data";
+import { refreshGlobalDataAction } from "./refresh-global-data-action";
 
 export default async function Page() {
   console.log(`Page: /cache`);
@@ -25,6 +30,23 @@ export default async function Page() {
             {data.map((album) => (
               <li key={album.id}>
                 <Link href={`/cache/album/${album.id}`}>{album.name}</Link>
+                <FormButton
+                  title="Add to favorites"
+                  action={updateFavoriteAction}
+                >
+                  <input
+                    type="hidden"
+                    name="userId"
+                    value={user.id}
+                    className="hidden"
+                  />
+                  <input
+                    type="hidden"
+                    name="albumId"
+                    value={album.id}
+                    className="hidden"
+                  />
+                </FormButton>
               </li>
             ))}
           </ul>
@@ -33,6 +55,14 @@ export default async function Page() {
           <Favorites />
         </Suspense>
       </div>
+      <FormButton title="Refresh Favorites" action={refreshFavoriteAction} />
+      <Suspense fallback={<div>Loading global data...</div>}>
+        <GlobalData />
+      </Suspense>
+      <FormButton
+        title="Refresh Global Data"
+        action={refreshGlobalDataAction}
+      />
     </div>
   );
 }
