@@ -51,6 +51,7 @@
     "lucide-react": "^0.395.0",
     "next": "^14",
     "next-themes": "^0.3.0",
+    "pg-boss": "^9.0.3",
     "prisma": "^5.15.0",
     "react": "rc",
     "react-day-picker": "^8.10.1",
