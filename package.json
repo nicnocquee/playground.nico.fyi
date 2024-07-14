@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "db:migrate": "prisma migrate deploy",
+    "db:migrate-dev": "prisma migrate dev",
+    "db:reset": "prisma migrate reset",
     "db:generate": "prisma generate",
     "build": "npm run db:migrate && npm run db:generate && cross-env IS_BUILDING=true next build",
     "start": "next start",
