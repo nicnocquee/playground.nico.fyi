@@ -1,3 +1,4 @@
+import { prismaClient } from "@/prisma/prisma-client";
 import PgBoss from "pg-boss";
 export const POST = async (req: Request) => {
   const start = performance.now();
@@ -27,5 +28,9 @@ async function someAsyncJobHandler(job: PgBoss.Job<{ task: string }>) {
 
   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  console.log(`job ${job.id} completed: ${job.data.task}`);
+  await prismaClient.log.create({
+    data: {
+      data: job.data,
+    },
+  });
 }
