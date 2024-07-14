@@ -1,21 +1,22 @@
 import { prismaClient } from "@/prisma/prisma-client";
+import { pgboss } from "./pgboss";
 import PgBoss from "pg-boss";
+
 export const POST = async (req: Request) => {
   const start = performance.now();
   const { task } = await req.json();
-  const boss = new PgBoss(process.env.PGBOSS_URL!);
 
-  boss.on("error", (error) => console.error(error));
+  pgboss.on("error", (error) => console.error(error));
 
-  await boss.start();
+  await pgboss.start();
 
   const queue = "job-1";
 
-  let jobId = await boss.send(queue, { task });
+  let jobId = await pgboss.send(queue, { task });
 
   console.log(`created job in queue ${queue}: ${jobId}`);
 
-  await boss.work(queue, someAsyncJobHandler);
+  await pgboss.work(queue, someAsyncJobHandler);
 
   const end = performance.now();
   console.log(`handler took ${end - start}ms`);
