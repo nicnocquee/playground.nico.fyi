@@ -2,14 +2,15 @@
 
 URL="https://playground.nico.fyi/pgboss/api"
 REQUESTS=100
+CONCURRENT_REQUESTS=5
 FAILURES=0
 
 # Print header
 printf "%-4s %-10s %-10s %-6s %-7s %s\n" "Req#" "Random#" "Duration" "Status" "Result" "Response"
 echo "-------------------------------------------------------------------------"
 
-for i in $(seq 1 $REQUESTS)
-do
+send_request() {
+  i=$1
   # Generate a random number between 1 and 1000000
   RANDOM_NUMBER=$((RANDOM % 1000000 + 1))
   
@@ -38,9 +39,17 @@ do
   
   # Print the results in one line
   printf "%-4d %-10d %-10.4f %-6d %-7s %s\n" "$i" "$RANDOM_NUMBER" "$DURATION" "$HTTP_STATUS" "$RESULT" "$RESPONSE_BODY"
-  
-  # Optional: Add a small delay between requests to avoid overwhelming the server
-  sleep 0.1
+}
+
+for ((i=1; i<=$REQUESTS; i+=$CONCURRENT_REQUESTS))
+do
+  for ((j=0; j<$CONCURRENT_REQUESTS; j++))
+  do
+    if [ $((i+j)) -le $REQUESTS ]; then
+      send_request $((i+j)) &
+    fi
+  done
+  wait
 done
 
 echo "-------------------------------------------------------------------------"
