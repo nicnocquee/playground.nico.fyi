@@ -10,8 +10,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  directUrl = env("DATABASE_URL")
-  url       = env("DATABASE_URL_POOLING") // uses a direct connection
+  directUrl = env("DATABASE_URL") // uses a direct connection
+  url       = env("DATABASE_URL_POOLING")
 }
 
 model Album {
