@@ -1,16 +1,11 @@
 "use client";
-import { useActionState, useRef, useState } from "react";
+import { useRef } from "react";
 import { doSomething } from "./actions";
+import { useResetableActionState } from "use-resetable-action-state";
 
 export default function Form() {
-  const [state, submit, isPending] = useActionState(
-    async (state: any, payload: FormData | null) => {
-      if (!payload) {
-        return null;
-      }
-      const data = await doSomething(state, payload);
-      return data;
-    },
+  const [state, submit, isPending, reset] = useResetableActionState(
+    doSomething,
     null
   );
   const formRef = useRef<HTMLFormElement>(null);
@@ -40,7 +35,7 @@ export default function Form() {
         <button
           type="button"
           onClick={() => {
-            submit(null);
+            reset();
           }}
         >
           Reset
