@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { urlSearchParamsToObject, usePushRoute } from "@/lib/use-push-route";
+import { urlSearchParamsToObject, usePushRoute } from "use-push-router";
 import { XIcon } from "lucide-react";
 import { useState } from "react";
 
