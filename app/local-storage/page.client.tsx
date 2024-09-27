@@ -21,7 +21,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -41,7 +40,7 @@ export const LocalStorageDemo = () => {
       <Card
         data-server={isServer}
         data-dark={data.darkMode}
-        className="w-[350px]   data-[dark=true]:bg-slate-800 bg-white data-[dark=true]:text-white"
+        className="w-[350px] data-[dark=true]:bg-slate-800 bg-white data-[dark=true]:text-white"
       >
         <CardHeader>
           <CardTitle>Create project</CardTitle>
@@ -99,7 +98,6 @@ export const LocalStorageDemo = () => {
                 id="dark-mode"
                 checked={data.darkMode === "true"}
                 onCheckedChange={(checked) => {
-                  console.log(`here??`);
                   setData({
                     ...data,
                     darkMode: checked ? "true" : "false",
