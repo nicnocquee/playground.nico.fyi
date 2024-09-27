@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { urlSearchParamsToObject, usePushRoute } from "use-push-router";
 import { XIcon } from "lucide-react";
 import { useState } from "react";
+import { urlSearchParamsToObject, usePushRoute } from "use-push-router";
 
 export default function WhatPage() {
   const { pushSearchParams, searchParams } = usePushRoute();
