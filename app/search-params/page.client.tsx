@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { XIcon } from "lucide-react";
+import { CheckIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { urlSearchParamsToObject, usePushRoute } from "use-push-router";
 
@@ -87,7 +87,7 @@ function KeyValueInput({
     <div className="grid grid-cols-2 gap-2">
       <Input placeholder="key" value={theKey} disabled={true} />
       {typeof value === "string" ? (
-        <ValueInput theKey={theKey} value={value} />
+        <ValueInput key={theKey} theKey={theKey} value={value} />
       ) : (
         <div className="flex flex-col space-y-2">
           {value.map((v, i) => {
@@ -101,9 +101,14 @@ function KeyValueInput({
 
 function ValueInput({ theKey, value }: { theKey: string; value: string }) {
   const { pushSearchParams } = usePushRoute();
+  const [newValue, setValue] = useState(value);
   return (
     <div className="flex flex-row space-x-2">
-      <Input placeholder="value" value={value} disabled={true} />
+      <Input
+        placeholder="value"
+        value={newValue}
+        onChange={(e) => setValue(e.target.value)}
+      />
       <Button
         variant={"ghost"}
         onClick={() => {
@@ -111,6 +116,14 @@ function ValueInput({ theKey, value }: { theKey: string; value: string }) {
         }}
       >
         <XIcon className="h-4 w-4" />
+      </Button>
+      <Button
+        variant={"ghost"}
+        onClick={() => {
+          pushSearchParams({ set: { [theKey]: newValue } });
+        }}
+      >
+        <CheckIcon className="h-4 w-4" />
       </Button>
     </div>
   );
