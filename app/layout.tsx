@@ -17,7 +17,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "min-h-screen")}>{children}</body>
+      <body className={cn(inter.className, "min-h-screen")}>
+        {children}
+        <div className="text-sm text-muted-foreground text-center sticky bottom-0 bg-background">
+          The source code for this playground is in{" "}
+          <a
+            className="underline"
+            href="https://github.com/nicnocquee/playground.nico.fyi"
+          >
+            https://github.com/nicnocquee/playground.nico.fyi
+          </a>
+        </div>
+      </body>
     </html>
   );
 }
