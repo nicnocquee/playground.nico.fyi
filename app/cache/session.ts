@@ -46,7 +46,7 @@ export async function decrypt<T>(input: string): Promise<T> {
 }
 
 export async function getSession() {
-  const session = cookies().get("session")?.value;
+  const session = (await cookies()).get("session")?.value;
   if (!session) return null;
   return await decrypt<SessionType>(session);
 }
@@ -79,7 +79,7 @@ export async function createSession(userId: string) {
   });
 
   // Save the session in a cookie
-  cookies().set("session", session, {
+  (await cookies()).set("session", session, {
     expires,
     httpOnly: true,
     path: "/",
@@ -89,11 +89,11 @@ export async function createSession(userId: string) {
 }
 
 export const destroySession = async () => {
-  cookies().delete("session");
+  (await cookies()).delete("session");
 };
 
 export async function updateSession(request?: NextRequest) {
-  const theCookies = request?.cookies ?? cookies();
+  const theCookies = request?.cookies ?? (await cookies());
   const session = theCookies.get("session")?.value;
   if (!session) return;
 
