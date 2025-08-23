@@ -6,10 +6,12 @@ import { VerticalSteps, StepComponent } from "../tasks-steps";
 import { createSequentialProcesses } from "../tasks-steps/tasks";
 
 export default async function CheckTransactionPage({
-  params: { transaction },
+  params,
 }: {
-  params: { transaction: string };
+  params: Promise<{ transaction: string }>;
 }) {
+  const { transaction } = await params;
+
   if (!transaction || transaction.trim().length === 0) {
     notFound();
   }

@@ -1,8 +1,10 @@
-const SuccessLogin = ({
-  searchParams: { voucher, email },
+const SuccessLogin = async ({
+  searchParams,
 }: {
-  searchParams: { voucher: string; email: string };
+  searchParams: Promise<{ voucher: string; email: string }>;
 }) => {
+  const { voucher, email } = await searchParams;
+
   return (
     <div>
       Voucher: {voucher}
