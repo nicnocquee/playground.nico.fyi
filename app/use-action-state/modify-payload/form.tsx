@@ -4,9 +4,23 @@ import { doSomething } from "./actions";
 import { useResettableActionState } from "use-resettable-action-state";
 
 export default function Form() {
-  const [state, submit, isPending, reset] = useResettableActionState(
+  const [state, submit, isPending, reset, payload] = useResettableActionState(
     doSomething,
-    null
+    null,
+    undefined,
+    async (payload, abortController) => {
+      const ip = await fetch("https://api.ipify.org?format=json").then((res) =>
+        res.json()
+      );
+      if (ip.ip) {
+        payload?.set("ip", ip.ip);
+      } else {
+        abortController.abort({
+          error: "Failed to get IP",
+        });
+      }
+      return payload;
+    }
   );
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -22,14 +36,20 @@ export default function Form() {
       )}
       <p>{state && state.data?.message}</p>
       <input
+        required
         disabled={isPending}
         className="border w-full border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
         type="text"
         name="name"
         id="name"
         placeholder="Enter your name"
-        defaultValue={(state?.data?.name as string) || ""}
+        defaultValue={
+          (payload?.get("name") as string) ||
+          (state?.data?.name as string) ||
+          ""
+        }
       />
+      <input type="hidden" name="ip" value="" />
 
       <div className="flex flex-row justify-between items-center w-full">
         <button

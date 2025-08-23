@@ -4,7 +4,7 @@ import { doSomething } from "./actions";
 import { useResettableActionState } from "use-resettable-action-state";
 
 export default function Form() {
-  const [state, submit, isPending, reset] = useResettableActionState(
+  const [state, submit, isPending, reset, payload] = useResettableActionState(
     doSomething,
     null
   );
@@ -28,7 +28,11 @@ export default function Form() {
         name="name"
         id="name"
         placeholder="Enter your name"
-        defaultValue={(state?.data?.name as string) || ""}
+        defaultValue={
+          (payload?.get("name") as string) ||
+          (state?.data?.name as string) ||
+          ""
+        }
       />
 
       <div className="flex flex-row justify-between items-center w-full">
