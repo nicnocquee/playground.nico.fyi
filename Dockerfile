@@ -20,6 +20,7 @@ COPY app ./app
 COPY public ./public
 COPY components ./components
 COPY lib ./lib
+COPY hooks ./hooks
 COPY next.config.mjs .
 COPY prisma ./prisma
 COPY components.json .
