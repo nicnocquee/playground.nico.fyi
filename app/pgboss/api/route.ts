@@ -1,6 +1,6 @@
 import { prismaClient } from "@/prisma/prisma-client";
 import { pgboss } from "./pgboss";
-import PgBoss from "pg-boss";
+import PgBoss, { WorkHandler } from "pg-boss";
 
 export const POST = async (req: Request) => {
   const start = performance.now();
@@ -16,7 +16,10 @@ export const POST = async (req: Request) => {
 
   console.log(`created job in queue ${queue}: ${jobId}`);
 
-  await pgboss.work(queue, someAsyncJobHandler);
+  await pgboss.work(
+    queue,
+    someAsyncJobHandler as unknown as WorkHandler<{ task: string }>
+  );
 
   const end = performance.now();
   console.log(`handler took ${end - start}ms`);
