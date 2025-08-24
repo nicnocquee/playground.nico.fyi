@@ -3,7 +3,7 @@ import { authorize } from "../../basic-auth";
 import { clearData, seedData } from "./action";
 
 export const POST = async (request: Request) => {
-  const resp = authorize();
+  const resp = await authorize();
   if (resp) {
     return resp;
   }
