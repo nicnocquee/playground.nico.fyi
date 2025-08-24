@@ -3,8 +3,8 @@ import Albums from "../hoisted-client/albums";
 import Songs from "../hoisted-client/songs";
 import { headers } from "next/headers";
 
-export default function Page() {
-  headers();
+export default async function Page() {
+  await headers();
   const albums = process.env.IS_BUILDING
     ? Promise.resolve([])
     : prismaClient.album.findMany({ take: 100 });

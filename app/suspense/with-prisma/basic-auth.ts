@@ -1,8 +1,8 @@
 import { headers } from "next/headers";
 
-export const authorize = () => {
-  const heads = headers();
-  const basicAuth = heads.get("authorization");
+export const authorize = async () => {
+  const headersList = await headers();
+  const basicAuth = headersList.get("authorization");
 
   if (basicAuth) {
     const authValue = basicAuth.split(" ")[1];
