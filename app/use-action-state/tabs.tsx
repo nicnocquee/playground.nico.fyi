@@ -21,6 +21,10 @@ const tabs = [
     label: "Modify payload demo",
     href: "/use-action-state/modify-payload",
   },
+  {
+    label: "reCAPTCHA v3 demo",
+    href: "/use-action-state/recaptcha-v3",
+  },
 ];
 
 const useCurrentTab = () => {
