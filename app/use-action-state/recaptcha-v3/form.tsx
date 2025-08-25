@@ -50,7 +50,7 @@ export default function Form() {
         placeholder="Enter your name"
         defaultValue={(payload?.get("name") as string) || ""}
       />
-      <input type="hidden" name="ip" value="" />
+      <input type="hidden" name="token" value="" />
 
       <div className="flex flex-row justify-between items-center w-full">
         <button
