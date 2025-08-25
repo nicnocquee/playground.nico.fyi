@@ -8,8 +8,9 @@ import {
   useState,
   useTransition,
 } from "react";
-import { doSomething } from "./action";
+import { doSomething, doSomethingParallel } from "./action";
 import { doSomething as doSomethingAPI } from "./api/do-something/client";
+import { runParallelAction } from "./util/parallel-action";
 
 export default function PageClient({ index }: { index: number }) {
   const [status, setStatus] = useState<"pending" | "success" | "error" | null>(
@@ -55,7 +56,8 @@ const TheCheckbox = ({
 }) => {
   //const { isPending, handleChange } = useSubmitAction(index, onStatusChange);
   //const { isPending, handleChange } = useSubmitAPI(index, onStatusChange);
-  const { isPending, handleChange } = useSubmitAPIClient(index, onStatusChange);
+  //const { isPending, handleChange } = useSubmitAPIClient(index, onStatusChange);
+  const { isPending, handleChange } = useParallelAction(index, onStatusChange);
 
   useEffect(() => {
     if (isPending) {
@@ -143,6 +145,36 @@ const useSubmitAction = (
     console.log("handleChange", index);
     startTransition(async () => {
       const result = await doSomething(index.toString());
+      const newStatus = result.status === 1 ? "success" : "error";
+      console.log("newStatus", newStatus);
+      onStatusChange(index.toString(), newStatus);
+    });
+  }, [index, onStatusChange, startTransition]);
+
+  return useMemo(() => {
+    return {
+      isPending,
+      handleChange,
+      index,
+    };
+  }, [isPending, handleChange, index]);
+};
+
+const useParallelAction = (
+  index: number,
+  onStatusChange: (
+    id: string,
+    status: "pending" | "success" | "error" | null
+  ) => void
+) => {
+  const [isPending, startTransition] = useTransition();
+
+  const handleChange = useCallback(async () => {
+    console.log("handleChange", index);
+    startTransition(async () => {
+      const result = await runParallelAction(
+        doSomethingParallel(index.toString())
+      );
       const newStatus = result.status === 1 ? "success" : "error";
       console.log("newStatus", newStatus);
       onStatusChange(index.toString(), newStatus);
