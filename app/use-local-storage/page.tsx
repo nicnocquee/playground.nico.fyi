@@ -50,7 +50,7 @@ const Counter = () => {
         </Button>
         <Button
           variant="destructive"
-          onClick={clearValue}
+          onClick={() => clearValue()}
           aria-label="Clear from storage"
         >
           Clear
