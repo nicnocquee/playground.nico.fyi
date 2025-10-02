@@ -44,8 +44,6 @@ RUN \
 # Step 2. Production image, copy all the files and run next
 FROM base AS runner
 
-RUN apk --no-cache add curl
-
 WORKDIR /app
 
 # Don't run production as root
@@ -72,9 +70,8 @@ ENV BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 # Note: Don't expose ports here, Compose will handle that for us
-
 EXPOSE 3000
-
 ENV PORT 3000
 
-CMD HOSTNAME=0.0.0.0 node server.js
+ENV HOSTNAME "0.0.0.0"
+CMD ["node", "server.js"]
