@@ -6,5 +6,5 @@ export const refreshFavoriteAction = async (
   _prevState: any,
   _formData: FormData
 ) => {
-  revalidateTag("favorites");
+  revalidateTag("favorites", "max");
 };

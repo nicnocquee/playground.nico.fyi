@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { toggleFavorite } from "./data-source";
 
 export const updateFavoriteAction = async (
@@ -16,5 +16,5 @@ export const updateFavoriteAction = async (
 
   await toggleFavorite(parseInt(userId), parseInt(albumId));
 
-  revalidateTag("favorites");
+  revalidateTag("favorites", "max");
 };

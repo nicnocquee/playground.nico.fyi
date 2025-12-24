@@ -6,5 +6,5 @@ export const refreshGlobalDataAction = async (
   _prevState: any,
   _formData: FormData
 ) => {
-  revalidateTag("globalData");
+  revalidateTag("globalData", "max");
 };
